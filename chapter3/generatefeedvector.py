@@ -28,8 +28,11 @@ apcount={}
 wordcounts={}
 with open('feedlist.txt') as infile:  
     feedlist = [line for line in infile]
+j=0
 for feedurl in feedlist:
 	title,wc=getwordcounts(feedurl)
+	j+=1
+	print('get words from %d url' %j)
 	if title and  wc:
 		wordcounts[title]=wc
 		for word,count in wc.items():
@@ -46,7 +49,11 @@ out=file('blogdata.txt', 'w')
 out.write('Blog')
 for word in wordlist: out.write('\t%s' %word)
 out.write('\n')
+i=0
 for blog,wc in wordcounts.items():
+	i+=1
+	print i
+	print ('\t%s\n' %blog)
 	out.write(blog)
 	for word in wordlist:
 		if word in wc: out.write('\t%d' %wc[word])
