@@ -82,18 +82,22 @@ def printclust(clust,labels=None,n=0):
 	if clust.right!=None:
 		printclust(clust.right,labels=labels,n=n+1)
 
-out=file('answer','w')
-def printToFile(clust,labels=None,n=0):	
+
+def createFile(clust,labels=None,n=0):
+	out=file('answer.txt','w')
+	printToFile(clust,out,labels)
+
+def printToFile(clust,out,labels=None,n=0):	
 	for i in range(n):
-		out.write(' ',)
+		out.write(' ')
 	if clust.id<0:
-		out.write('_')
+		out.write('_\n')
 	
 	else:
 		if labels==None: out.write(clust.id)
 		else: out.write(labels[clust.id])
 
 	if clust.left!=None: 
-		printToFile(clust.left, labels=labels,n=n+1)
+		printToFile(clust.left, out, labels=labels,n=n+1)
 	if clust.right!=None:
-		printToFile(clust.right,labels=labels,n=n+1)
+		printToFile(clust.right,out, labels=labels,n=n+1)
